@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import { View, StyleSheet } from "react-native"
 import { connect } from "react-redux"
-import MapView from "react-native-maps"
 import { generate } from "shortid"
 import moment from "moment"
 import PropTypes from "prop-types"
-import MapsManager from "../../lib/MapsManager"
+import MapView from "react-native-maps"
+import { ApiManager, MapsManager } from "../../lib"
 import Button from "../../components/Button"
 import { Page, Horizontal } from "../../components/Containers"
 import {
@@ -16,7 +16,6 @@ import {
   SearchResultTopText,
 } from "../../components/Typography"
 import MapStyle from "../../styles/Map"
-import ApiManager from "../../lib/ApiManager"
 import Colors from "../../constants/Colors"
 import Shadow from "../../lib/Shadow"
 

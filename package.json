@@ -69,6 +69,8 @@
     "moment-timezone": "^0.5.26",
     "prop-types": "^15.7.2",
     "react": "16.8.3",
+    "react-dom": "^16.8.6",
+    "react-google-maps": "^9.4.5",
     "react-moment-proptypes": "^1.7.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.1.tar.gz",
     "react-native-action-button": "^2.8.5",
@@ -78,6 +80,8 @@
     "react-native-reanimated": "^1.1.0",
     "react-native-svg": "~9.5.1",
     "react-native-svg-charts": "^5.3.0",
+    "react-native-web": "^0.11.7",
+    "react-native-web-maps": "^0.2.0",
     "react-navigation": "github:uclapi/react-navigation",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
@@ -89,6 +93,7 @@
     "shortid": "^2.2.15"
   },
   "devDependencies": {
+    "@expo/webpack-config": "^0.7.4",
     "@storybook/addon-actions": "^5.1.11",
     "@storybook/addon-knobs": "^5.1.11",
     "@storybook/addon-links": "^5.1.11",
@@ -112,7 +117,6 @@
     "inquirer": "^7.0.0",
     "jest-expo": "^34.0.1",
     "lint-staged": "^9.2.5",
-    "react-dom": "16.8.6",
     "react-native-storybook-loader": "^1.8.0",
     "react-test-renderer": "^16.9.0",
     "redux-logger": "^3.0.6"
