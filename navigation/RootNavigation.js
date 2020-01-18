@@ -3,6 +3,7 @@ import { createStackNavigator } from "react-navigation-stack"
 
 import FAQScreen from "../screens/FAQScreen"
 import LiveSeatingMapScreen from "../screens/LiveSeatingMapScreen"
+import MarketplaceScreen from "../screens/MarketplaceScreen"
 import NotificationsScreen from "../screens/NotificationsScreen"
 import PersonDetailScreen from "../screens/PersonDetailScreen"
 import RoomDetailScreen from "../screens/RoomDetailScreen"
@@ -24,6 +25,9 @@ const RootStackNavigator = createStackNavigator(
         header: null,
       },
       screen: MainTabNavigator,
+    },
+    Marketplace: {
+      screen: MarketplaceScreen,
     },
     Notifications: {
       navigationOptions: {
@@ -49,6 +53,7 @@ const RootStackNavigator = createStackNavigator(
     TimetableDetail: {
       screen: TimetableDetailScreen,
     },
+
   },
   {
     defaultNavigationOptions: () => ({

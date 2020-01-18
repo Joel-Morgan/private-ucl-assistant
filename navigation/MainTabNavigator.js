@@ -4,6 +4,7 @@ import React from "react"
 import { createBottomTabNavigator } from "react-navigation-tabs"
 
 import Colors from "../constants/Colors"
+import MarketplaceScreen from "../screens/MarketplaceScreen"
 import PeopleScreen from "../screens/PeopleScreen"
 import RoomsScreen from "../screens/RoomsScreen"
 import SettingsScreen from "../screens/SettingsScreen"
@@ -20,6 +21,9 @@ const screens = {
     screen: StudySpacesScreen,
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
+  Marketplace: {
+    screen: MarketplaceScreen,
+  },
   People: {
     screen: PeopleScreen,
   },
@@ -48,6 +52,9 @@ export default createBottomTabNavigator(screens, {
           break
         case `Rooms`:
           iconName = `map-pin`
+          break
+        case `Marketplace`:
+          iconName = `cart`
           break
         case `Settings`:
           iconName = `settings`
