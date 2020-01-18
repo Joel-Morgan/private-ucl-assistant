@@ -15,7 +15,7 @@ const MarketplaceCard = ({
   listingDescription,
   listingPrice,
   listingImage,
-  //  listingID,
+  // listingID,
   authorName,
   authorEmail,
   pubDate,
@@ -40,13 +40,11 @@ const MarketplaceCard = ({
       </BodyText>
       <BodyText>
           <MaterialCommunityIcons name="currency-gbp" />
-          {` `}
           {listingPrice}
       </BodyText>
 
       <BodyText>
-          <Feather name="date-range" />
-          {` `}
+          <Feather name="calendar" />
           {pubDate}
       </BodyText>
 
