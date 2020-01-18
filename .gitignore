@@ -1,8 +1,8 @@
 node_modules
 .expo
 .expo-shared
-app.json
 node_modules
+app.json
 **/node_modules
 **/*.env
 **/*.eslintcache
