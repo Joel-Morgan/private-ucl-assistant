@@ -1,4 +1,4 @@
-import { Feather } from "@expo/vector-icons"
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
 import { Image } from 'react-native'
@@ -29,7 +29,7 @@ const MarketplaceCard = ({
      // console.error(`An error occurred`, err)) }}
     >
       <BodyText>
-          <Feather name="person" />
+          <Feather name="user" />
           {authorName}
       </BodyText>
       <BodyText>
@@ -39,7 +39,7 @@ const MarketplaceCard = ({
           {authorEmail}
       </BodyText>
       <BodyText>
-          <Feather name="currency-gbp" />
+          <MaterialCommunityIcons name="currency-gbp" />
           {` `}
           {listingPrice}
       </BodyText>

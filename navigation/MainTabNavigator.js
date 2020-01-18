@@ -54,7 +54,7 @@ export default createBottomTabNavigator(screens, {
           iconName = `map-pin`
           break
         case `Marketplace`:
-          iconName = `cart`
+          iconName = `shopping-cart`
           break
         case `Settings`:
           iconName = `settings`
