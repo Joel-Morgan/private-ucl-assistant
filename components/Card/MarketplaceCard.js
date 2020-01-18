@@ -3,6 +3,9 @@ import PropTypes from "prop-types"
 import React from "react"
 import { Image } from 'react-native'
 
+import {
+  LOCALHOST_URL,
+} from "../../constants/API"
 import { BodyText } from "../Typography"
 import Card from "."
 
@@ -47,7 +50,7 @@ const MarketplaceCard = ({
           {pubDate}
       </BodyText>
 
-      <Image source={{ url: listingImage }} />
+      <Image source={{ url: `${LOCALHOST_URL}${listingImage}` }} />
 
     </Card>
 )

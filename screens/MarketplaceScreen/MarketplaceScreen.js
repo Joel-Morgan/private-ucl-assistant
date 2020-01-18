@@ -33,16 +33,16 @@ class MarketplaceScreen extends Component {
             <Page>
                 <TitleText>Marketplace</TitleText>
                     {listingsList.map((listing) => (
-<MarketplaceCard
-  listingTitle={listing.listing_title}
-  listingDescription={listing.listing_description}
-  listingPrice={listing.listing_price}
-  listingImage={listing.listing_image}
-  listingID={listing.listingID}
-  authorName={listing.author_name}
-  authorEmail={listing.author_email}
-  pubDate={listing.pub_date}
-/>
+                      <MarketplaceCard
+                        listingTitle={listing.listing_title}
+                        listingDescription={listing.listing_description}
+                        listingPrice={listing.listing_price}
+                        listingImage={listing.listing_image}
+                        listingID={listing.listingID}
+                        authorName={listing.author_name}
+                        authorEmail={listing.author_email}
+                        pubDate={listing.pub_date}
+                      />
                     ))}
             </Page>
       )
