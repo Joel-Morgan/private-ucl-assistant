@@ -53,7 +53,6 @@ const RootStackNavigator = createStackNavigator(
     TimetableDetail: {
       screen: TimetableDetailScreen,
     },
-
   },
   {
     defaultNavigationOptions: () => ({

@@ -12,20 +12,22 @@ const MarketplaceCard = ({
   listingDescription,
   listingPrice,
   listingImage,
+  //  listingID,
   authorName,
   authorEmail,
   pubDate,
 }) => (
     <Card
       title={listingTitle}
-    //   Have onpress leave the app and go to the Events page
-    //   onPress={() => { Linking.openURL(url).catch((err) =>
-    // console.error(`An error occurred`, err)) }}
+      //  Have onpress leave the app and go to the Events page
+       // onPress={() => { navigation.navigate(`ListingDetail`, {
+       //  Identity: listingID,
+       // }).catch((err) =>
+     // console.error(`An error occurred`, err)) }}
     >
       <BodyText>
           <Feather name="person" />
-{` `}
-{authorName}
+          {authorName}
       </BodyText>
       <BodyText>
           {listingDescription}
@@ -35,14 +37,14 @@ const MarketplaceCard = ({
       </BodyText>
       <BodyText>
           <Feather name="currency-gbp" />
-{` `}
-{listingPrice}
+          {` `}
+          {listingPrice}
       </BodyText>
 
       <BodyText>
           <Feather name="date-range" />
-{` `}
-{pubDate}
+          {` `}
+          {pubDate}
       </BodyText>
 
       <Image source={{ url: listingImage }} />
