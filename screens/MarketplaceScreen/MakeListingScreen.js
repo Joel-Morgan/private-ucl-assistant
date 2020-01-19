@@ -2,14 +2,27 @@
 import * as ImagePicker from 'expo-image-picker'
 import React, { Component } from "react"
 import {
-  Button, SafeAreaView, ScrollView, Text,
+  SafeAreaView, ScrollView, StyleSheet, Text,
+  View,
 } from 'react-native'
+import HorizontalLine
+  from "react-native-svg-charts/src/chart-decorators/horizontal-line"
 import { connect } from "react-redux"
 
+import Button from "../../components/Button"
+import { Horizontal } from "../../components/Containers"
 import { TextInput } from "../../components/Input"
 import { TitleText } from "../../components/Typography"
 import { ApiManager } from "../../lib"
+import Styles from "../../styles/Button"
 
+
+const styles = StyleSheet.create({
+  pick_stuff: {
+    marginTop: 25,
+  },
+
+})
 
 export class MakeListingScreen extends Component {
   constructor() {
@@ -39,54 +52,71 @@ export class MakeListingScreen extends Component {
 
   render() {
     const { user } = this.props
-
+    // todo: ADD THE UNDER TEXT LIVE CHARACTER COUNT UPDATER
     return (
-        <SafeAreaView style={{ alignItems: `center`, flex: 1, justifyContent: `center` }}>
-        <ScrollView>
-        <TitleText>Make a Listing</TitleText>
-        <Text>{user.fullName}</Text>
-        <Text>Listing title</Text>
+        <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
+        <ScrollView style={{ marginHorizontal: `10%` }}>
+        <TitleText>
+Make a listing for
+{user.fullName}
+        </TitleText>
+        <Text>Listing title (60 chars max)</Text>
         <TextInput
           style={{
-            borderColor: `gray`, borderWidth: 1, height: 40, margin: 15, width: `80%`,
+            height: `10%`,
           }}
           value={this.state.listing_title}
+          maxLength={60}
           onChangeText={(listing_title) => this.setState({ listing_title })}
         />
-        <Text>Listing description</Text>
+        <Text>Listing description (240 chars max)</Text>
 
         <TextInput
           style={{
-            borderColor: `gray`, borderWidth: 1, height: 80, margin: 15, width: `80%`,
+            height: `20%`,
           }}
           multiline
-          numberOfLines={4}
+          numberOfLines={5}
+          maxLength={240}
           value={this.state.listing_description}
           onChangeText={(listing_description) => this.setState({ listing_description })}
         />
 
-        <Text>Listing price</Text>
+        <Horizontal>
+        <Text
+          style={{
+            alignContent: `flex-start`,
+            marginRight: `auto`,
+          }}
+        >
+          Listing price
+        </Text>
 
+          <Text>
+            £
+          </Text>
         <TextInput
           style={{
-            borderColor: `gray`, borderWidth: 1, height: 40, margin: 15, width: `20%`,
+            height: `80%`, minWidth: 25, width: `50%`,
           }}
           value={this.state.listing_price}
           onChangeText={(listing_price) => this.setState({ listing_price })}
         />
+        </Horizontal>
 
         <Button
-          title="Pick an image from camera roll"
           onPress={this._pickImage}
-        />
+        >
+          Pick an image from camera roll
+        </Button>
         <Text />
         <Button
-          title="Submit"
           onPress={this.submit}
-        />
+        >
+          Submit
+        </Button>
 
         </ScrollView>
-
         </SafeAreaView>
     )
   }

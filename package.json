@@ -27,17 +27,7 @@
     "test:dev": "jest --watch --coverage=false",
     "upload": "node scripts/upload.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,json}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
+
   "config": {
     "react-native-storybook-loader": {
       "pattern": "**/*-stories.js"
