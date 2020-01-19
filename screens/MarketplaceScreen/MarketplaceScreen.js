@@ -15,7 +15,7 @@ class MarketplaceScreen extends Component {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     ApiManager.marketplace
       .getListings()
       .then((listing) => {
@@ -24,13 +24,14 @@ class MarketplaceScreen extends Component {
   }
 
     static navigationOptions = {
-      title: `Marketplace`,
+      header: null,
     }
 
     render() {
       const { listingsList } = this.state
+      const { navigation } = this.props
       return (
-            <Page>
+            <Page mainTabPage>
                 <TitleText>Marketplace</TitleText>
                     {listingsList.map((listing) => (
                       <MarketplaceCard
@@ -39,9 +40,11 @@ class MarketplaceScreen extends Component {
                         listingDescription={listing.listing_description}
                         listingPrice={listing.listing_price.toString()}
                         listingImage={listing.listing_image}
+                        listingID={listing.listing_id}
                         authorName={listing.author_name}
                         authorEmail={listing.author_email}
                         pubDate={listing.pub_date}
+                        navigation={navigation}
                       />
                     ))}
             </Page>

@@ -18,18 +18,27 @@ const MarketplaceCard = ({
   listingDescription,
   listingPrice,
   listingImage,
-  // listingID,
+  listingID,
   authorName,
   authorEmail,
   pubDate,
+  navigation,
 }) => (
     <Card
       title={listingTitle}
-      //  Have onpress leave the app and go to the Events page
-       // onPress={() => { navigation.navigate(`ListingDetail`, {
-       //  Identity: listingID,
-       // }).catch((err) =>
-     // console.error(`An error occurred`, err)) }}
+      // Have onpress leave the app and go to the listings page
+      onPress={() => {
+        navigation.navigate(`ListingDetail`, {
+          authorEmail,
+          authorName,
+          date: pubDate,
+          description: listingDescription,
+          id: listingID,
+          image: listingImage,
+          price: listingPrice,
+          title: listingTitle,
+        })
+      }}
     >
       <BodyText>
           <Feather name="user" />
@@ -47,8 +56,9 @@ const MarketplaceCard = ({
       </BodyText>
 
       <BodyText>
-          <Feather name="calendar" />
-          {pubDate}
+          <Feather name="date-range" />
+          {` `}
+          {pubDate.substring(0, 10)}
       </BodyText>
 
       <Image style={imgstyles.shooow} source={{ uri: `${listingImage}` }} />
@@ -61,9 +71,11 @@ MarketplaceCard.propTypes = {
   authorEmail: PropTypes.string,
   authorName: PropTypes.string,
   listingDescription: PropTypes.string,
+  listingID: PropTypes.string,
   listingImage: PropTypes.string,
   listingPrice: PropTypes.string,
   listingTitle: PropTypes.string,
+  navigation: PropTypes.shape().isRequired,
   pubDate: PropTypes.string,
 }
 
@@ -71,6 +83,7 @@ MarketplaceCard.defaultProps = {
   authorEmail: `Error Defaults`,
   authorName: `Error Defaults`,
   listingDescription: `Error Defaults`,
+  listingID: `Error Defaults`,
   listingImage: `Error Defaults`,
   listingPrice: `Error Defaults`,
   listingTitle: `Error Defaults`,

@@ -2,6 +2,7 @@ import { createAppContainer } from "react-navigation"
 import { createStackNavigator } from "react-navigation-stack"
 
 import FAQScreen from "../screens/FAQScreen"
+import ListingDetailScreen from "../screens/ListingDetailScreen"
 import LiveSeatingMapScreen from "../screens/LiveSeatingMapScreen"
 import MarketplaceScreen from "../screens/MarketplaceScreen"
 import NotificationsScreen from "../screens/NotificationsScreen"
@@ -16,6 +17,9 @@ const RootStackNavigator = createStackNavigator(
   {
     FAQ: {
       screen: FAQScreen,
+    },
+    ListingDetail: {
+      screen: ListingDetailScreen,
     },
     LiveSeatingMap: {
       screen: LiveSeatingMapScreen,
