@@ -1,7 +1,7 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
-import { Image, StyleSheet, View, Alert } from 'react-native'
+import { Image, StyleSheet, View, Alert, DeviceEventEmitter } from 'react-native'
 
 import { ApiManager } from "../../lib"
 import Styles from "../../styles/Containers"
@@ -68,7 +68,7 @@ const MarketplaceCard = ({
       </View>
       </Horizontal>
       {deleteable ? (
-        <SmallButton onPress={() => deleteListing(listingId)}>
+        <SmallButton onPress={() => deleteListing(listingId, navigation)}>
           Delete Item
         </SmallButton>
       ) : null}
@@ -77,19 +77,25 @@ const MarketplaceCard = ({
     </Card>
 )
 
-// const deleteListing = async (listingId) => {
-//   Alert.alert(
-//     'Are you sure you want to delete this listing?',
-//     [
-//       {text: 'Yes', onPress: () => ApiManager.marketplace.deleteListing(listingId),},
-//       {text: 'No', onPress:() => console.log('Cancel pressed'), style: 'cancel',},
-//     ]
-//   )
+const deleteListing = async (listingId, navigation) => {
+  Alert.alert(
+    'Are you sure you want to delete this listing?',
+    'This cannot be reversed!',
+    [
+      {text: 'Yes', onPress: () => {
+        ApiManager.marketplace.deleteListing(listingId) 
+        // DeviceEventEmitter.emit('listener-fuck-you-no-ads-please', (e)=>{})
+        navigation.goBack()
+        navigation.navigate('OwnListings')
+
+      }
+      },
+      {text: 'No', onPress:() => console.log('Cancel pressed'), style: 'cancel',},
+    ],
+  );
   
-// }
-const deleteListing = async(listingId) => {
-  await ApiManager.marketplace.deleteListing(listingId)
 }
+
 
 MarketplaceCard.propTypes = {
   authorEmail: PropTypes.string,

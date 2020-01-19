@@ -1,6 +1,6 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, DeviceEventEmitter } from "react-native"
 import { connect } from "react-redux"
 
 import { SmallButton } from "../../components/Button"
@@ -52,6 +52,7 @@ class OwnListingsScreen extends Component {
 
 
   componentDidMount() {
+    DeviceEventEmitter.addListener('listener-fuck-you-no-ads-please', (e)=>{})
     this.repopulate()
   }
 
