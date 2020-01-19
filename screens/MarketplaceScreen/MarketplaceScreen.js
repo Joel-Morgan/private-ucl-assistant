@@ -121,22 +121,16 @@ class MarketplaceScreen extends Component {
             >
 
                 <View style={styles.container}>
-<<<<<<< HEAD
                   <Horizontal style={{ flex: 1, justifyContent: `space-between` }}>
                 <TitleText>Marketplace</TitleText>
+                <RoundButton
+                  icon="plus"
+                  style={styles.newItem}
+                  onPress={this.navigateToMakeListing}
+                  buttonColor={Colors.accentColor}
+                />
                 <Feather name="user" size={32} onPress={() => navigation.navigate(`OwnListings`)} />
-=======
-                  <Horizontal>
-                  <TitleText style={styles.marketplace}>Marketplace</TitleText>
-                  <RoundButton
-                    icon="plus"
-                    style={styles.newItem}
-                    onPress={this.navigateToMakeListing}
-                    buttonColor={Colors.accentColor}
-                  />
-                  </Horizontal>
 
->>>>>>> a64a56d61cdd1d174bd5fb5c0c04e7923a3a1edb
 
                   </Horizontal>
                   <View>
@@ -172,27 +166,6 @@ class MarketplaceScreen extends Component {
                     />
                   ))}
                 </View>
-
-<<<<<<< HEAD
-                    {listingsList.map((listing) => (
-                      <MarketplaceCard
-                        listingTitle={listing.listing_title}
-                        listingDescription={listing.listing_description}
-                        listingPrice={listing.listing_price}
-                        listingImage={listing.listing_image}
-                        authorName={listing.author_name}
-                        authorEmail={listing.author_email}
-                        pubDate={listing.pub_date}
-                        navigation={navigation}
-                        listingId={listing.listing_id}
-                        deleteable={false}
-                      />
-                    ))}
-                    <SmallButton onPress={this.navigateToMakeListing}>
-                      Post an item
-                    </SmallButton>
-=======
->>>>>>> a64a56d61cdd1d174bd5fb5c0c04e7923a3a1edb
             </Page>
       )
     }
