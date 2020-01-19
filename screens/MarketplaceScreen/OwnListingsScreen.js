@@ -1,14 +1,13 @@
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
-
+import { connect } from "react-redux"
 import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
-import { TextInput, Text } from '../../components/Input'
+import { TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
 import ApiManager from "../../lib/ApiManager"
-import { Feather } from "@expo/vector-icons"
 
 const styles = StyleSheet.create({
   container: {
@@ -24,7 +23,7 @@ const styles = StyleSheet.create({
 const MIN_QUERY_LENGTH = 1
 const SEARCH_DELAY = 500
 
-class MarketplaceScreen extends Component {
+class OwnListingsScreen extends Component {
   static propTypes = {
     clear: PropTypes.func,
     navigation: PropTypes.func,
@@ -37,6 +36,10 @@ class MarketplaceScreen extends Component {
     },
   }
 
+  static mapStateToProps = (state) => ({
+    user: state.user,
+  })
+
 
   constructor(props) {
     super(props)
@@ -45,6 +48,7 @@ class MarketplaceScreen extends Component {
       search: ``,
     }
   }
+  
 
   componentDidMount() {
     this.repopulate()
@@ -52,8 +56,10 @@ class MarketplaceScreen extends Component {
 
   repopulate = () => {
     const { search } = this.state
+    const {user: {email}} = this.props
+
     ApiManager.marketplace
-      .getListings(search)
+      .getOwnListings(email, search)
       .then((listing) => {
         this.setState({ listingsList: listing })
       })
@@ -113,12 +119,8 @@ class MarketplaceScreen extends Component {
               onRefresh={this.repopulate}
             >
                 <View style={styles.container}>
-                  <Horizontal style={{flex: 1, justifyContent:"space-between"}}>
                 <TitleText>Marketplace</TitleText>
-                <Feather name='user' size={32} onPress={() => navigation.navigate('OwnListings')}>
-                </Feather>
 
-                </Horizontal>
                   <View>
                     <Horizontal>
                       <TextInput
@@ -148,7 +150,7 @@ class MarketplaceScreen extends Component {
                         pubDate={listing.pub_date}
                         navigation={navigation}
                         listingId={listing.listing_id}
-                        deleteable={false}
+                        deleteable={true}
                       />
                     ))}
                     <SmallButton onPress={this.navigateToMakeListing}>
@@ -159,5 +161,6 @@ class MarketplaceScreen extends Component {
     }
 }
 
-
-export default MarketplaceScreen
+export default connect(
+    OwnListingsScreen.mapStateToProps,
+  )(OwnListingsScreen)

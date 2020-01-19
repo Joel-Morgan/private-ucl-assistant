@@ -2,6 +2,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
 import { Image, StyleSheet, View } from 'react-native'
+import { SmallButton } from "../../components/Button"
+import { ApiManager } from "../../lib"
+
 
 import Styles from "../../styles/Containers"
 import { Horizontal } from "../Containers"
@@ -31,6 +34,7 @@ const MarketplaceCard = ({
   authorEmail,
   pubDate,
   navigation,
+  deleteable
 }) => (
     <Card
       title={listingTitle}
@@ -63,9 +67,19 @@ const MarketplaceCard = ({
         <SearchResultBottomText>{listingDescription}</SearchResultBottomText>
       </View>
       </Horizontal>
+      {deleteable ? (
+        <SmallButton onPress={(listingId) => deleteListing(listingId)}>
+          Delete Item
+        </SmallButton>
+       ) : null}
 
+      
     </Card>
 )
+
+const deleteListing = async (listingId) => {
+  await ApiManager.marketplace.deleteListing(listingId)
+}
 
 MarketplaceCard.propTypes = {
   authorEmail: PropTypes.string,

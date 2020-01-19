@@ -39,6 +39,7 @@ export class MakeListingScreen extends Component {
 
   render() {
     const { user } = this.props
+    
 
     return (
         <SafeAreaView style={{ alignItems: `center`, flex: 1, justifyContent: `center` }}>
@@ -98,13 +99,10 @@ export class MakeListingScreen extends Component {
     }
 
     _pickImage = async () => {
-      console.log(this.state.listing_title)
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
       })
-
-      console.log(result)
 
       if (!result.cancelled) {
         this.setState({
