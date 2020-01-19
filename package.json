@@ -27,7 +27,6 @@
     "test:dev": "jest --watch --coverage=false",
     "upload": "node scripts/upload.js"
   },
-
   "config": {
     "react-native-storybook-loader": {
       "pattern": "**/*-stories.js"

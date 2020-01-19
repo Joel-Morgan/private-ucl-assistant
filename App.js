@@ -78,10 +78,10 @@ class App extends Component {
     this.setState({ isLoadingComplete: true })
   }
 
-  handleNotification = (notification) => console.log(
-    `Received notification`,
-    notification,
-  )
+  // handleNotification = (notification) => console.log(
+  //   `Received notification`,
+  //   notification,
+  // )
 
   onNavigationStateChange = (prevState, currentState) => {
     const currentScreen = App.getActiveRouteName(currentState)

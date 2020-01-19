@@ -1,12 +1,10 @@
 // import PropTypes from "prop-types"
 import * as ImagePicker from 'expo-image-picker'
+import PropTypes from "prop-types"
 import React, { Component } from "react"
 import {
   SafeAreaView, ScrollView, StyleSheet, Text,
-  View,
 } from 'react-native'
-import HorizontalLine
-  from "react-native-svg-charts/src/chart-decorators/horizontal-line"
 import { connect } from "react-redux"
 
 import Button from "../../components/Button"
@@ -14,28 +12,34 @@ import { Horizontal } from "../../components/Containers"
 import { TextInput } from "../../components/Input"
 import { TitleText } from "../../components/Typography"
 import { ApiManager } from "../../lib"
-import Styles from "../../styles/Button"
 
 
-const styles = StyleSheet.create({
-  pick_stuff: {
-    marginTop: 25,
-  },
-
-})
 
 export class MakeListingScreen extends Component {
-  constructor() {
-    super()
-    this.state = {
-      author_email: ``,
-      author_name: ``,
-      listing_description: ``,
-      listing_image: ``,
-      listing_price: ``,
-      listing_title: ``,
+    static propTypes = {
+      navigation: PropTypes.func,
     }
-  }
+
+    static defaultProps = {
+      navigation: () => {
+      },
+    }
+
+    constructor() {
+      super()
+      this.state = {
+        author_email: ``,
+        author_name: ``,
+        listing_description: ``,
+        listing_image: ``,
+        listing_price: ``,
+        listing_title: ``,
+      }
+    }
+
+  static navigationOptions = {
+    header: null,
+  };
 
   componentDidMount() {
     const { user: { email }, user: { fullName } } = this.props
@@ -52,12 +56,15 @@ export class MakeListingScreen extends Component {
 
   render() {
     const { user } = this.props
-    // todo: ADD THE UNDER TEXT LIVE CHARACTER COUNT UPDATER
+
+      // todo: ADD THE UNDER TEXT LIVE CHARACTER COUNT UPDATER
     return (
         <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
         <ScrollView style={{ marginHorizontal: `10%` }}>
         <TitleText>
-          Make a listing for: {user.fullName}
+          Make a listing for:
+{` `}
+{user.fullName}
         </TitleText>
         <Text>Listing title (60 chars max)</Text>
         <TextInput
@@ -114,7 +121,7 @@ export class MakeListingScreen extends Component {
         >
           Submit
         </Button>
-        <Text/>
+        <Text />
 
         </ScrollView>
         </SafeAreaView>
@@ -125,6 +132,9 @@ export class MakeListingScreen extends Component {
       const params = this.state
 
       await ApiManager.marketplace.postListing(params)
+
+      const { navigation } = this.props
+      navigation.navigate(`Marketplace`)
     }
 
     _pickImage = async () => {

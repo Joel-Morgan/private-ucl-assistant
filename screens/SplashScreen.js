@@ -124,6 +124,7 @@ class SplashScreen extends Component {
 
     // update user properties
     AnalyticsManager.setUserId(upi)
+    console.log(`\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n` + apiToken);
     AnalyticsManager.setUserProperties({
       apiToken,
       cn,
