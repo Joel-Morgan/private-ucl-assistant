@@ -2,6 +2,7 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
 import { connect } from "react-redux"
+
 import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
@@ -48,7 +49,7 @@ class OwnListingsScreen extends Component {
       search: ``,
     }
   }
-  
+
 
   componentDidMount() {
     this.repopulate()
@@ -56,7 +57,7 @@ class OwnListingsScreen extends Component {
 
   repopulate = () => {
     const { search } = this.state
-    const {user: {email}} = this.props
+    const { user: { email } } = this.props
 
     ApiManager.marketplace
       .getOwnListings(email, search)
@@ -150,7 +151,7 @@ class OwnListingsScreen extends Component {
                         pubDate={listing.pub_date}
                         navigation={navigation}
                         listingId={listing.listing_id}
-                        deleteable={true}
+                        deleteable
                       />
                     ))}
                     <SmallButton onPress={this.navigateToMakeListing}>
@@ -162,5 +163,5 @@ class OwnListingsScreen extends Component {
 }
 
 export default connect(
-    OwnListingsScreen.mapStateToProps,
-  )(OwnListingsScreen)
+  OwnListingsScreen.mapStateToProps,
+)(OwnListingsScreen)

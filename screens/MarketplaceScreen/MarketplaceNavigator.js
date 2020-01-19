@@ -13,8 +13,8 @@ const MarketplaceNavigator = createStackNavigator(
       screen: MarketplaceScreen,
     },
     OwnListings: {
-      screen: OwnListingsScreen
-    }
+      screen: OwnListingsScreen,
+    },
   },
   {
     defaultNavigationOptions: () => ({

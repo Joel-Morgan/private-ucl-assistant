@@ -1,3 +1,4 @@
+import { Feather } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
@@ -5,10 +6,9 @@ import { StyleSheet, View } from "react-native"
 import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
-import { TextInput, Text } from '../../components/Input'
+import { Text, TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
 import ApiManager from "../../lib/ApiManager"
-import { Feather } from "@expo/vector-icons"
 
 const styles = StyleSheet.create({
   container: {
@@ -113,12 +113,11 @@ class MarketplaceScreen extends Component {
               onRefresh={this.repopulate}
             >
                 <View style={styles.container}>
-                  <Horizontal style={{flex: 1, justifyContent:"space-between"}}>
+                  <Horizontal style={{ flex: 1, justifyContent: `space-between` }}>
                 <TitleText>Marketplace</TitleText>
-                <Feather name='user' size={32} onPress={() => navigation.navigate('OwnListings')}>
-                </Feather>
+                <Feather name="user" size={32} onPress={() => navigation.navigate(`OwnListings`)} />
 
-                </Horizontal>
+                  </Horizontal>
                   <View>
                     <Horizontal>
                       <TextInput

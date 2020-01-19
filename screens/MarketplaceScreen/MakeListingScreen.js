@@ -39,7 +39,7 @@ export class MakeListingScreen extends Component {
 
   render() {
     const { user } = this.props
-    
+
 
     return (
         <SafeAreaView style={{ alignItems: `center`, flex: 1, justifyContent: `center` }}>

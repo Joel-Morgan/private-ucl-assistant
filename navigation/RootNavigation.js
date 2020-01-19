@@ -35,9 +35,6 @@ const RootStackNavigator = createStackNavigator(
     MakeListing: {
       screen: MakeListingScreen,
     },
-    OwnListings: {
-      screen: OwnListingsScreen
-    },
     Marketplace: {
       screen: MarketplaceScreen,
     },
@@ -46,6 +43,9 @@ const RootStackNavigator = createStackNavigator(
         header: null,
       },
       screen: NotificationsScreen,
+    },
+    OwnListings: {
+      screen: OwnListingsScreen,
     },
     PersonDetail: {
       screen: PersonDetailScreen,

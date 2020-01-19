@@ -2,11 +2,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
 import { Image, StyleSheet, View } from 'react-native'
-import { SmallButton } from "../../components/Button"
+
 import { ApiManager } from "../../lib"
-
-
 import Styles from "../../styles/Containers"
+import { SmallButton } from "../Button"
 import { Horizontal } from "../Containers"
 import {
   SearchResultBottomText, SearchResultTopText,
@@ -34,7 +33,7 @@ const MarketplaceCard = ({
   authorEmail,
   pubDate,
   navigation,
-  deleteable
+  deleteable,
 }) => (
     <Card
       title={listingTitle}
@@ -71,9 +70,9 @@ const MarketplaceCard = ({
         <SmallButton onPress={(listingId) => deleteListing(listingId)}>
           Delete Item
         </SmallButton>
-       ) : null}
+      ) : null}
 
-      
+
     </Card>
 )
 
