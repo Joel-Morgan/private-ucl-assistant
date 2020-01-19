@@ -1,14 +1,14 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, StyleSheet, View, Alert } from 'react-native'
 
 import { ApiManager } from "../../lib"
 import Styles from "../../styles/Containers"
 import { SmallButton } from "../Button"
-import { Horizontal } from "../Containers"
+import { Horizontal, Spacer } from "../Containers"
 import {
-  SearchResultBottomText, SearchResultTopText,
+  SearchResultBottomText, SubtitleText,
 } from "../Typography"
 import Card from "."
 
@@ -59,15 +59,16 @@ const MarketplaceCard = ({
         resizeMode="cover"
       />
       <View style={styles.listingView}>
-        <SearchResultTopText>
+        <SubtitleText>
           <MaterialCommunityIcons name="currency-gbp" />
           {listingPrice}
-        </SearchResultTopText>
+        </SubtitleText>
         <SearchResultBottomText>{listingDescription}</SearchResultBottomText>
+        <Spacer/>
       </View>
       </Horizontal>
       {deleteable ? (
-        <SmallButton onPress={(listingId) => deleteListing(listingId)}>
+        <SmallButton onPress={() => deleteListing(listingId)}>
           Delete Item
         </SmallButton>
       ) : null}
@@ -76,7 +77,17 @@ const MarketplaceCard = ({
     </Card>
 )
 
-const deleteListing = async (listingId) => {
+// const deleteListing = async (listingId) => {
+//   Alert.alert(
+//     'Are you sure you want to delete this listing?',
+//     [
+//       {text: 'Yes', onPress: () => ApiManager.marketplace.deleteListing(listingId),},
+//       {text: 'No', onPress:() => console.log('Cancel pressed'), style: 'cancel',},
+//     ]
+//   )
+  
+// }
+const deleteListing = async(listingId) => {
   await ApiManager.marketplace.deleteListing(listingId)
 }
 
@@ -88,7 +99,7 @@ MarketplaceCard.propTypes = {
   listingImage: PropTypes.string,
   listingPrice: PropTypes.string,
   listingTitle: PropTypes.string,
-  navigation: PropTypes.shape().isRequired,
+  navigation: PropTypes.func,
   pubDate: PropTypes.string,
 }
 

@@ -156,7 +156,7 @@ class MarketplaceScreen extends Component {
                     <MarketplaceCard
                       listingTitle={listing.listing_title}
                       listingDescription={listing.listing_description}
-                      listingPrice={listing.listing_price}
+                      listingPrice={listing.listing_price.toString()}
                       listingImage={listing.listing_image}
                       authorName={listing.author_name}
                       authorEmail={listing.author_email}

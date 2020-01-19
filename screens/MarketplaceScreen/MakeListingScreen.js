@@ -57,8 +57,7 @@ export class MakeListingScreen extends Component {
         <SafeAreaView style={{ flex: 1, marginTop: 10 }}>
         <ScrollView style={{ marginHorizontal: `10%` }}>
         <TitleText>
-Make a listing for
-{user.fullName}
+          Make a listing for: {user.fullName}
         </TitleText>
         <Text>Listing title (60 chars max)</Text>
         <TextInput
@@ -115,6 +114,7 @@ Make a listing for
         >
           Submit
         </Button>
+        <Text/>
 
         </ScrollView>
         </SafeAreaView>

@@ -120,8 +120,8 @@ class OwnListingsScreen extends Component {
               onRefresh={this.repopulate}
             >
                 <View style={styles.container}>
-                <TitleText>Marketplace</TitleText>
-
+                <TitleText>Own Listings</TitleText>
+              
                   <View>
                     <Horizontal>
                       <TextInput
@@ -154,9 +154,6 @@ class OwnListingsScreen extends Component {
                         deleteable
                       />
                     ))}
-                    <SmallButton onPress={this.navigateToMakeListing}>
-                      Post an item
-                    </SmallButton>
             </Page>
       )
     }
