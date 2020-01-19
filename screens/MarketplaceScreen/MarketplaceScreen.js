@@ -35,7 +35,7 @@ class MarketplaceScreen extends Component {
                 <TitleText>Marketplace</TitleText>
                     {listingsList.map((listing) => (
                       <MarketplaceCard
-                        key={listing.listingID}
+                        listingId={listing.listing_id}
                         listingTitle={listing.listing_title}
                         listingDescription={listing.listing_description}
                         listingPrice={listing.listing_price.toString()}

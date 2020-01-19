@@ -1,11 +1,12 @@
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
-import { Image, StyleSheet } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 
-import { BodyText } from "../Typography"
+import { BodyText, SubtitleText, SearchResultTopText, SearchResultBottomText } from "../Typography"
 import Card from "."
 import Styles from "../../styles/Containers"
+import { Horizontal } from "../Containers"
 
 const styles = StyleSheet.create({
   emptyImage: {
@@ -19,7 +20,7 @@ const MarketplaceCard = ({
   listingDescription,
   listingPrice,
   listingImage,
-  key,
+  listingId,
   authorName,
   authorEmail,
   pubDate,
@@ -34,26 +35,29 @@ const MarketplaceCard = ({
           authorName,
           date: pubDate,
           description: listingDescription,
-          id: key,
+          id: listingId,
           image: listingImage,
           price: listingPrice,
           title: listingTitle,
         })
       }}
     >
-      <BodyText>
-          {listingDescription}
-      </BodyText>
-      <BodyText>
-          <MaterialCommunityIcons name="currency-gbp" />
-          {listingPrice}
-      </BodyText>
+      <Horizontal>
       <Image 
         source={{ uri: `${listingImage}` }} 
-        resizeMethod="scale"
+        resizeMethod="resize"
         style={[Styles.image, styles.emptyImage]}
-        resizeMode="center"
+        resizeMode="cover"
       />
+      <View style={{flex: 1, marginLeft: 8}}>
+        <SearchResultTopText> 
+          <MaterialCommunityIcons name="currency-gbp" />
+          {listingPrice}
+          </SearchResultTopText>
+        <SearchResultBottomText>{listingDescription}</SearchResultBottomText>
+      </View>
+      </Horizontal>
+      
     </Card>
 )
 
@@ -61,7 +65,7 @@ MarketplaceCard.propTypes = {
   authorEmail: PropTypes.string,
   authorName: PropTypes.string,
   listingDescription: PropTypes.string,
-  key: PropTypes.string,
+  listingId: PropTypes.string,
   listingImage: PropTypes.string,
   listingPrice: PropTypes.string,
   listingTitle: PropTypes.string,
@@ -73,7 +77,7 @@ MarketplaceCard.defaultProps = {
   authorEmail: `Error Defaults`,
   authorName: `Error Defaults`,
   listingDescription: `Error Defaults`,
-  key: `Error Defaults`,
+  listingId: `Error Defaults`,
   listingImage: `Error Defaults`,
   listingPrice: `Error Defaults`,
   listingTitle: `Error Defaults`,
