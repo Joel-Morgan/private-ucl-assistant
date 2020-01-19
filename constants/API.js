@@ -11,4 +11,5 @@ export const FREE_ROOMS_URL = `${ASSISTANT_API_URL}/freerooms`
 export const EQUIPMENT_URL = `${ASSISTANT_API_URL}/equipment`
 export const SITES_URL = `${ASSISTANT_API_URL}/sites`
 export const LOCALHOST_URL = `http://marketplace.compositegrid.com:8000`
+// export const LOCALHOST_URL = `http://10.24.0.10:8000`
 export const LISTINGS_URL = `${LOCALHOST_URL}/marketplace/listings`

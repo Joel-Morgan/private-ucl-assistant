@@ -1,14 +1,17 @@
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React from "react"
-import { Image } from 'react-native'
+import { Image, StyleSheet } from 'react-native'
 
-import {
-  LOCALHOST_URL,
-} from "../../constants/API"
 import { BodyText } from "../Typography"
 import Card from "."
 
+const imgstyles = StyleSheet.create({
+  shooow: {
+    height: 200,
+    width: 50,
+  },
+})
 
 const MarketplaceCard = ({
   listingTitle,
@@ -48,7 +51,8 @@ const MarketplaceCard = ({
           {pubDate}
       </BodyText>
 
-      <Image source={{ url: `${LOCALHOST_URL}${listingImage}` }} />
+      <Image style={imgstyles.shooow} source={{ uri: `${listingImage}` }} />
+
 
     </Card>
 )
