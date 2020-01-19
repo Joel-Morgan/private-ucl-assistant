@@ -58,6 +58,7 @@ export class MakeListingScreen extends Component {
         <ScrollView style={{ marginHorizontal: `10%` }}>
         <TitleText>
 Make a listing for
+{` `}
 {user.fullName}
         </TitleText>
         <Text>Listing title (60 chars max)</Text>
