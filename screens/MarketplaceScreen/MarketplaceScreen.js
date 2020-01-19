@@ -72,7 +72,6 @@ class MarketplaceScreen extends Component {
 
     render() {
       const { listingsList, search } = this.state
-      console.log(this.state)
       return (
             <Page>
                 <View style={styles.container}>
