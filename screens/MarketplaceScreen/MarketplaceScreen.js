@@ -1,3 +1,4 @@
+import PropTypes from "prop-types"
 import React, { Component } from "react"
 
 import { SmallButton } from "../../components/Button"
@@ -8,8 +9,18 @@ import ApiManager from "../../lib/ApiManager"
 
 
 class MarketplaceScreen extends Component {
-  constructor() {
-    super()
+  static propTypes = {
+    navigation: PropTypes.func,
+  }
+
+  static defaultProps = {
+    navigation: () => {
+    },
+  }
+
+
+  constructor(props) {
+    super(props)
     this.state = {
       listingsList: [],
     }
