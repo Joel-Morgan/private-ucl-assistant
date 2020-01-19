@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   },
 })
 
+
 class ListingDetailScreen extends Component {
   static propTypes = {
     authorEmail: PropTypes.string,
@@ -60,6 +61,7 @@ class ListingDetailScreen extends Component {
   }
 
   render() {
+    const { navigation } = this.props
     const {
       id,
       title,
@@ -68,7 +70,7 @@ class ListingDetailScreen extends Component {
       image,
       authorName,
       date,
-    } = this.props.navigation.state.params
+    } = navigation.state.params
 
     return (
       <PageNoScroll>

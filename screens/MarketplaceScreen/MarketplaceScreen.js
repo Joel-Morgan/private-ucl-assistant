@@ -2,26 +2,36 @@ import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
 
-import { SmallButton } from "../../components/Button"
+import { RoundButton, SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
 import { TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
+import Colors from "../../constants/Colors"
 import ApiManager from "../../lib/ApiManager"
 
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 20,
   },
-
+  marketplace:
+    {
+      marginRight: `auto`,
+    },
+  newItem:
+    {
+      marginLeft: `auto`,
+    },
   textInput: {
     flex: 1,
     marginRight: 10,
   },
+
+
 })
 
-const MIN_QUERY_LENGTH = 1
-const SEARCH_DELAY = 500
+const SEARCH_DELAY = 250
+
 
 class MarketplaceScreen extends Component {
   static propTypes = {
@@ -74,16 +84,13 @@ class MarketplaceScreen extends Component {
   }
 
 
-  onChangeText = (searchstring: String) => {
+  onChangeText = (searchstring) => {
     this.setState({ search: searchstring })
-
-    if (searchstring.length >= MIN_QUERY_LENGTH) {
-      clearTimeout(this.searchTimer)
-      this.searchTimer = setTimeout(
-        () => this.repopulate(),
-        SEARCH_DELAY,
-      )
-    }
+    clearTimeout(this.searchTimer)
+    this.searchTimer = setTimeout(
+      () => this.repopulate(),
+      SEARCH_DELAY,
+    )
   }
 
   // onQueryChange = (search) => {
@@ -111,43 +118,53 @@ class MarketplaceScreen extends Component {
               refreshEnabled
               onRefresh={this.repopulate}
             >
+
                 <View style={styles.container}>
-                <TitleText>Marketplace</TitleText>
+                  <Horizontal>
+                  <TitleText style={styles.marketplace}>Marketplace</TitleText>
+                  <RoundButton
+                    icon="plus"
+                    style={styles.newItem}
+                    onPress={this.navigateToMakeListing}
+                    buttonColor={Colors.accentColor}
+                  />
+                  </Horizontal>
+
 
                   <View>
                     <Horizontal>
                       <TextInput
                         style={styles.textInput}
                         placeholder="Search for a listing..."
-                        onChangeText={(search) => this.onChangeText(search)}
+                        onChangeText={
+                          (searchInput) => this.onChangeText(searchInput)
+}
                         clearButtonMode="always"
-                        value={this.state.search}
+                        value={search}
                         // ref={this.searchInput}
                       />
                       {search.length > 0 ? (
                         <SmallButton onPress={this.clear}>Clear</SmallButton>
                       ) : null}
                     </Horizontal>
-                  </View>
 
+
+                  </View>
+                  {listingsList.map((listing) => (
+                    <MarketplaceCard
+                      listingTitle={listing.listing_title}
+                      listingDescription={listing.listing_description}
+                      listingPrice={listing.listing_price}
+                      listingImage={listing.listing_image}
+                      authorName={listing.author_name}
+                      authorEmail={listing.author_email}
+                      pubDate={listing.pub_date}
+                      navigation={navigation}
+                      listingId={listing.listing_id}
+                    />
+                  ))}
                 </View>
 
-                    {listingsList.map((listing) => (
-                      <MarketplaceCard
-                        listingTitle={listing.listing_title}
-                        listingDescription={listing.listing_description}
-                        listingPrice={listing.listing_price}
-                        listingImage={listing.listing_image}
-                        authorName={listing.author_name}
-                        authorEmail={listing.author_email}
-                        pubDate={listing.pub_date}
-                        navigation={navigation}
-                        listingId={listing.listing_id}
-                      />
-                    ))}
-                    <SmallButton onPress={this.navigateToMakeListing}>
-                      Post an item
-                    </SmallButton>
             </Page>
       )
     }
