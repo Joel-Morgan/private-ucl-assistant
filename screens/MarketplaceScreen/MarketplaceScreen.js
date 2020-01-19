@@ -2,27 +2,32 @@
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
 
+import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
-import { Page } from "../../components/Containers"
+import { Horizontal, Page } from "../../components/Containers"
+// import { SearchInput } from "../../components/Input"
+import { TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
 import ApiManager from "../../lib/ApiManager"
-import { SearchInput } from "../../components/Input";
 
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 20,
   },
+
+  textInput: {
+    flex: 1,
+    marginRight: 10,
+  },
 })
 
-const MIN_QUERY_LENGTH = 4
-const SEARCH_DELAY = 500
 
 class MarketplaceScreen extends Component {
   constructor() {
     super()
     this.state = {
       listingsList: [],
-      search: '',
+      search: ``,
     }
   }
 
@@ -34,18 +39,32 @@ class MarketplaceScreen extends Component {
       })
   }
 
-  onChangeText = (searchstring: String) => {
-    if (searchstring.length >= MIN_QUERY_LENGTH) {
-      clearTimeout(this.searchTimer)
-      this.searchTimer = setTimeout(
-        () => console.log("gi"),
-        SEARCH_DELAY,
-      )
-    }
-    this.setState({ search: searchstring })
+  onQueryChange = (query) => {
+    clearTimeout(this.searchTimer)
+    this.searchTimer = setTimeout(
+      () => console.log(query),
+      this.SEARCH_DELAY,
+    )
+    // this.setState({ query })
   }
 
-  clear = () => this.setState({ search: ``, listingsList: [] })
+
+  // onChangeText = (searchstring: String) => {
+  //   if (searchstring.length >= MIN_QUERY_LENGTH) {
+  //     clearTimeout(this.searchTimer)
+  //     this.searchTimer = setTimeout(
+  //       () => console.log(`gi`),
+  //       SEARCH_DELAY,
+  //     )
+  //   }
+  //   this.setState({ search: searchstring })
+  // }
+
+  onQueryChange = (search) => {
+    this.setState({ search })
+  }
+
+  clear = () => this.setState({ listingsList: [], search: `` })
 
     static navigationOptions = {
       title: `Marketplace`,
@@ -53,17 +72,29 @@ class MarketplaceScreen extends Component {
 
     render() {
       const { listingsList, search } = this.state
+      console.log(this.state)
       return (
             <Page>
                 <View style={styles.container}>
                 <TitleText>Marketplace</TitleText>
-                <SearchInput
-                  placeholder="Search for a listing title..."
-                  // onChangeQuery={this.onChangeText}
-                  clear={ console.log("no u") }
-                />
+
+                  <View>
+                    <Horizontal>
+                      <TextInput
+                        style={styles.textInput}
+                        placeholder="Search for a listing..."
+                        onChangeText={this.onQueryChange}
+                        clearButtonMode="always"
+                        value={{ search }}
+                      />
+                      {search.length > 0 ? (
+                        <SmallButton onPress={this.clear}>Clear</SmallButton>
+                      ) : null}
+                    </Horizontal>
+                  </View>
+
                 </View>
-                
+
                     {listingsList.map((listing) => (
                       <MarketplaceCard
                         listingTitle={listing.listing_title}
