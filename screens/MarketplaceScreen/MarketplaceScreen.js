@@ -1,4 +1,4 @@
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
 
@@ -23,15 +23,25 @@ const styles = StyleSheet.create({
 
 
 class MarketplaceScreen extends Component {
-  constructor() {
-    super()
+  static propTypes = {
+    clear: PropTypes.func,
+  }
+
+  static defaultProps = {
+    clear: () => {
+    },
+  }
+
+  constructor(props) {
+    super(props)
+    // this.searchInput = React.createRef()
     this.state = {
       listingsList: [],
       search: ``,
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     ApiManager.marketplace
       .getListings()
       .then((listing) => {
@@ -64,7 +74,14 @@ class MarketplaceScreen extends Component {
     this.setState({ search })
   }
 
-  clear = () => this.setState({ listingsList: [], search: `` })
+  // clear = () => this.setState({ listingsList: [], search: `` })
+  clear = () => {
+    console.log(`hi:`)
+    const { clear } = this.props
+    clear()
+    this.setState({ listingsList: [], search: `` })
+    console.log(this.state)
+  }
 
     static navigationOptions = {
       title: `Marketplace`,
@@ -84,7 +101,8 @@ class MarketplaceScreen extends Component {
                         placeholder="Search for a listing..."
                         onChangeText={this.onQueryChange}
                         clearButtonMode="always"
-                        value={{ search }}
+                        value={search}
+                        // ref={this.searchInput}
                       />
                       {search.length > 0 ? (
                         <SmallButton onPress={this.clear}>Clear</SmallButton>
@@ -100,6 +118,7 @@ class MarketplaceScreen extends Component {
                         listingDescription={listing.listing_description}
                         listingPrice={listing.listing_price}
                         listingImage={listing.listing_image}
+                        listingID={listing.listingID}
                         authorName={listing.author_name}
                         authorEmail={listing.author_email}
                         pubDate={listing.pub_date}
