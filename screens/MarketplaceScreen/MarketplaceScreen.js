@@ -25,16 +25,19 @@ const styles = StyleSheet.create({
 class MarketplaceScreen extends Component {
   static propTypes = {
     clear: PropTypes.func,
+    navigation: PropTypes.func,
   }
 
   static defaultProps = {
     clear: () => {
     },
+    navigation: () => {
+    },
   }
+
 
   constructor(props) {
     super(props)
-    // this.searchInput = React.createRef()
     this.state = {
       listingsList: [],
       search: ``,
@@ -47,6 +50,12 @@ class MarketplaceScreen extends Component {
       .then((listing) => {
         this.setState({ listingsList: listing })
       })
+  }
+
+
+  navigateToMakeListing = () => {
+    const { navigation: { navigate } } = this.props
+    navigate(`MakeListing`)
   }
 
   onQueryChange = (query) => {
@@ -124,6 +133,9 @@ class MarketplaceScreen extends Component {
                         pubDate={listing.pub_date}
                       />
                     ))}
+                    <SmallButton onPress={this.navigateToMakeListing}>
+                      Post an item
+                    </SmallButton>
             </Page>
       )
     }

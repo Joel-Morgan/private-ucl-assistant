@@ -27,17 +27,7 @@
     "test:dev": "jest --watch --coverage=false",
     "upload": "node scripts/upload.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint:staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,json}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
+
   "config": {
     "react-native-storybook-loader": {
       "pattern": "**/*-stories.js"
@@ -70,6 +60,7 @@
     "expo-constants": "~8.0.0",
     "expo-device": "~2.0.0",
     "expo-font": "~8.0.0",
+    "expo-image-picker": "~8.0.1",
     "expo-intent-launcher": "~8.0.0",
     "expo-linear-gradient": "~8.0.0",
     "expo-localization": "~8.0.0",
@@ -85,11 +76,12 @@
     "prop-types": "^15.7.2",
     "react": "16.9.0",
     "react-moment-proptypes": "^1.7.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
+    "react-native": "0.61.5",
     "react-native-action-button": "^2.8.5",
     "react-native-check-box": "^2.1.7",
     "react-native-elements": "^0.17.0",
     "react-native-gesture-handler": "~1.5.0",
+    "react-native-image-picker": "^2.0.0",
     "react-native-maps": "0.26.1",
     "react-native-reanimated": "~1.4.0",
     "react-native-svg": "9.13.3",

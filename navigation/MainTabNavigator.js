@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from "react-navigation-tabs"
 
 import Colors from "../constants/Colors"
 import MarketplaceScreen from "../screens/MarketplaceScreen"
+import MarketplaceNavigator from "../screens/MarketplaceScreen"
 import PeopleScreen from "../screens/PeopleScreen"
 import RoomsScreen from "../screens/RoomsScreen"
 import SettingsScreen from "../screens/SettingsScreen"
@@ -22,8 +23,10 @@ const screens = {
   },
   // eslint-disable-next-line sort-keys-fix/sort-keys-fix
   Marketplace: {
-    screen: MarketplaceScreen,
+    screen: MarketplaceNavigator,
   },
+
+
   People: {
     screen: PeopleScreen,
   },
