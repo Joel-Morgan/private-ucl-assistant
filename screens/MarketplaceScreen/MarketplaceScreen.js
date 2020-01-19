@@ -40,7 +40,6 @@ class MarketplaceScreen extends Component {
                         listingDescription={listing.listing_description}
                         listingPrice={listing.listing_price.toString()}
                         listingImage={listing.listing_image}
-                        listingID={listing.listing_id}
                         authorName={listing.author_name}
                         authorEmail={listing.author_email}
                         pubDate={listing.pub_date}

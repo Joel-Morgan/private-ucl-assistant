@@ -46,10 +46,11 @@ class ListingDetailScreen extends Component {
 
   sendEmail = () => {
     // const { email } = this.state
-    const authorEmail = this.props.navigation.state.params
+    const { title, authorEmail } = this.props.navigation.state.params
 
     MailManager.composeAsync({
       recipients: [authorEmail],
+      subject: `Response to ${title} on UCL Marketplace`,
     })
   }
 
@@ -70,12 +71,11 @@ class ListingDetailScreen extends Component {
 
     return (
       <PageNoScroll>
-        <TitleText>{`${title} : ${id}`}</TitleText>
+        <TitleText>{`${title}`}</TitleText>
+        <BodyText>{`ID: ${id}`}</BodyText>
         <Image
           source={{ uri: `${image}` }}
-          resizeMethod="scale"
-          style={[Styles.image, styles.emptyImage]}
-          resizeMode="contain"
+          style={{flex: 4}}
         />
         <BodyText>
           {`By ${authorName} on ${date.substring(0, 10)}`}

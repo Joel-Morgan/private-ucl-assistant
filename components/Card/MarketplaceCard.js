@@ -5,11 +5,12 @@ import { Image, StyleSheet } from 'react-native'
 
 import { BodyText } from "../Typography"
 import Card from "."
+import Styles from "../../styles/Containers"
 
-const imgstyles = StyleSheet.create({
-  shooow: {
+const styles = StyleSheet.create({
+  emptyImage: {
     height: 200,
-    width: 50,
+    marginTop: 25,
   },
 })
 
@@ -18,7 +19,7 @@ const MarketplaceCard = ({
   listingDescription,
   listingPrice,
   listingImage,
-  listingID,
+  key,
   authorName,
   authorEmail,
   pubDate,
@@ -33,7 +34,7 @@ const MarketplaceCard = ({
           authorName,
           date: pubDate,
           description: listingDescription,
-          id: listingID,
+          id: key,
           image: listingImage,
           price: listingPrice,
           title: listingTitle,
@@ -41,29 +42,18 @@ const MarketplaceCard = ({
       }}
     >
       <BodyText>
-          <Feather name="user" />
-          {authorName}
-      </BodyText>
-      <BodyText>
           {listingDescription}
-      </BodyText>
-      <BodyText>
-          {authorEmail}
       </BodyText>
       <BodyText>
           <MaterialCommunityIcons name="currency-gbp" />
           {listingPrice}
       </BodyText>
-
-      <BodyText>
-          <Feather name="date-range" />
-          {` `}
-          {pubDate.substring(0, 10)}
-      </BodyText>
-
-      <Image style={imgstyles.shooow} source={{ uri: `${listingImage}` }} />
-
-
+      <Image 
+        source={{ uri: `${listingImage}` }} 
+        resizeMethod="scale"
+        style={[Styles.image, styles.emptyImage]}
+        resizeMode="center"
+      />
     </Card>
 )
 
@@ -71,7 +61,7 @@ MarketplaceCard.propTypes = {
   authorEmail: PropTypes.string,
   authorName: PropTypes.string,
   listingDescription: PropTypes.string,
-  listingID: PropTypes.string,
+  key: PropTypes.string,
   listingImage: PropTypes.string,
   listingPrice: PropTypes.string,
   listingTitle: PropTypes.string,
@@ -83,7 +73,7 @@ MarketplaceCard.defaultProps = {
   authorEmail: `Error Defaults`,
   authorName: `Error Defaults`,
   listingDescription: `Error Defaults`,
-  listingID: `Error Defaults`,
+  key: `Error Defaults`,
   listingImage: `Error Defaults`,
   listingPrice: `Error Defaults`,
   listingTitle: `Error Defaults`,
