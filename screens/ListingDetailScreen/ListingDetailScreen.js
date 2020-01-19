@@ -7,16 +7,16 @@ import { PaddedIcon, PageNoScroll, Spacer } from "../../components/Containers"
 import {
   BodyText,
   ButtonText,
+  SearchResultTopText,
   TitleText,
 } from "../../components/Typography"
 import Colors from "../../constants/Colors"
 import MailManager from "../../lib/MailManager"
-import Styles from "../../styles/Containers"
+
 
 const styles = StyleSheet.create({
-  emptyImage: {
-    height: 200,
-    marginTop: 25,
+  image: {
+    flex: 4,
   },
 })
 
@@ -46,11 +46,12 @@ class ListingDetailScreen extends Component {
 
   sendEmail = () => {
     // const { email } = this.state
-    const { title, authorEmail } = this.props.navigation.state.params
+    const { navigation } = this.props
+    const { title, authorEmail } = navigation.state.params
 
     MailManager.composeAsync({
       recipients: [authorEmail],
-      subject: `Response to ${title} on UCL Marketplace`,
+      subject: `Response to your listing for ${title} on UCL Marketplace`,
     })
   }
 
@@ -73,16 +74,16 @@ class ListingDetailScreen extends Component {
       <PageNoScroll>
         <TitleText>{`${title}`}</TitleText>
         <BodyText>{`ID: ${id}`}</BodyText>
+        <BodyText>
+          {`Posted by ${authorName} on ${date.substring(0, 10)}`}
+        </BodyText>
         <Image
           source={{ uri: `${image}` }}
-          style={{flex: 4}}
+          style={styles.image}
         />
-        <BodyText>
-          {`By ${authorName} on ${date.substring(0, 10)}`}
-        </BodyText>
-        <BodyText>
-          {`Price: ${price}`}
-        </BodyText>
+        <SearchResultTopText>
+          {`Price: £${price}`}
+        </SearchResultTopText>
         <BodyText>
           {description}
         </BodyText>

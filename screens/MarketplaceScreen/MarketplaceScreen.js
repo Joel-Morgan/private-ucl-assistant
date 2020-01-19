@@ -5,7 +5,6 @@ import { StyleSheet, View } from "react-native"
 import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
-// import { SearchInput } from "../../components/Input"
 import { TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
 import ApiManager from "../../lib/ApiManager"
@@ -21,6 +20,8 @@ const styles = StyleSheet.create({
   },
 })
 
+const MIN_QUERY_LENGTH = 1
+const SEARCH_DELAY = 500
 
 class MarketplaceScreen extends Component {
   static propTypes = {
@@ -45,8 +46,13 @@ class MarketplaceScreen extends Component {
   }
 
   componentDidMount() {
+    this.repopulate()
+  }
+
+  repopulate = () => {
+    const { search } = this.state
     ApiManager.marketplace
-      .getListings()
+      .getListings(search)
       .then((listing) => {
         this.setState({ listingsList: listing })
       })
@@ -68,38 +74,43 @@ class MarketplaceScreen extends Component {
   }
 
 
-  // onChangeText = (searchstring: String) => {
-  //   if (searchstring.length >= MIN_QUERY_LENGTH) {
-  //     clearTimeout(this.searchTimer)
-  //     this.searchTimer = setTimeout(
-  //       () => console.log(`gi`),
-  //       SEARCH_DELAY,
-  //     )
-  //   }
-  //   this.setState({ search: searchstring })
-  // }
+  onChangeText = (searchstring: String) => {
+    this.setState({ search: searchstring })
 
-  onQueryChange = (search) => {
-    this.setState({ search })
+    if (searchstring.length >= MIN_QUERY_LENGTH) {
+      clearTimeout(this.searchTimer)
+      this.searchTimer = setTimeout(
+        () => this.repopulate(),
+        SEARCH_DELAY,
+      )
+    }
   }
+
+  // onQueryChange = (search) => {
+  //   this.setState({ search })
+  // }
 
   // clear = () => this.setState({ listingsList: [], search: `` })
   clear = () => {
-    console.log(`hi:`)
     const { clear } = this.props
     clear()
     this.setState({ listingsList: [], search: `` })
-    console.log(this.state)
+    setTimeout(() => this.repopulate(), 100)
   }
 
     static navigationOptions = {
-      title: `Marketplace`,
+      header: null,
     }
 
     render() {
       const { listingsList, search } = this.state
+      const { navigation } = this.props
       return (
-            <Page>
+            <Page
+              mainTabPage
+              refreshEnabled
+              onRefresh={this.repopulate}
+            >
                 <View style={styles.container}>
                 <TitleText>Marketplace</TitleText>
 
@@ -108,9 +119,9 @@ class MarketplaceScreen extends Component {
                       <TextInput
                         style={styles.textInput}
                         placeholder="Search for a listing..."
-                        onChangeText={this.onQueryChange}
+                        onChangeText={(search) => this.onChangeText(search)}
                         clearButtonMode="always"
-                        value={search}
+                        value={this.state.search}
                         // ref={this.searchInput}
                       />
                       {search.length > 0 ? (
@@ -127,10 +138,11 @@ class MarketplaceScreen extends Component {
                         listingDescription={listing.listing_description}
                         listingPrice={listing.listing_price}
                         listingImage={listing.listing_image}
-                        listingID={listing.listingID}
                         authorName={listing.author_name}
                         authorEmail={listing.author_email}
                         pubDate={listing.pub_date}
+                        navigation={navigation}
+                        listingId={listing.listing_id}
                       />
                     ))}
                     <SmallButton onPress={this.navigateToMakeListing}>
@@ -140,5 +152,6 @@ class MarketplaceScreen extends Component {
       )
     }
 }
+
 
 export default MarketplaceScreen
