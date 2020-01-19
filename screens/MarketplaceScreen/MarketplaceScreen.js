@@ -1,11 +1,11 @@
-// import PropTypes from "prop-types"
 import React, { Component } from "react"
 
+import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
-// import { MarketplaceCard } from "../../components/Card/MarketplaceCard"
 import { Page } from "../../components/Containers"
 import { TitleText } from "../../components/Typography"
 import ApiManager from "../../lib/ApiManager"
+
 
 class MarketplaceScreen extends Component {
   constructor() {
@@ -21,6 +21,12 @@ class MarketplaceScreen extends Component {
       .then((listing) => {
         this.setState({ listingsList: listing })
       })
+  }
+
+
+  navigateToMakeListing = () => {
+    const { navigation: { navigate } } = this.props
+    navigate(`MakeListing`)
   }
 
     static navigationOptions = {
@@ -44,6 +50,9 @@ class MarketplaceScreen extends Component {
                         pubDate={listing.pub_date}
                       />
                     ))}
+                    <SmallButton onPress={this.navigateToMakeListing}>
+                      Post an item
+                    </SmallButton>
             </Page>
       )
     }

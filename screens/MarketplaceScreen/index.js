@@ -1,1 +1,1 @@
-export { default } from "./MarketplaceScreen"
+export { default } from "./MarketplaceNavigator"

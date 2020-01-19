@@ -3,7 +3,8 @@ import { createStackNavigator } from "react-navigation-stack"
 
 import FAQScreen from "../screens/FAQScreen"
 import LiveSeatingMapScreen from "../screens/LiveSeatingMapScreen"
-import MarketplaceScreen from "../screens/MarketplaceScreen"
+import MarketplaceScreen from "../screens/MarketplaceScreen/MakeListingScreen"
+import MakeListingScreen from "../screens/MarketplaceScreen/MakeListingScreen"
 import NotificationsScreen from "../screens/NotificationsScreen"
 import PersonDetailScreen from "../screens/PersonDetailScreen"
 import RoomDetailScreen from "../screens/RoomDetailScreen"
@@ -25,6 +26,9 @@ const RootStackNavigator = createStackNavigator(
         header: null,
       },
       screen: MainTabNavigator,
+    },
+    MakeListing: {
+      screen: MakeListingScreen,
     },
     Marketplace: {
       screen: MarketplaceScreen,
