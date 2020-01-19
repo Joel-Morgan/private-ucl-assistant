@@ -1,40 +1,30 @@
-import { Feather } from "@expo/vector-icons"
 import PropTypes from "prop-types"
 import React, { Component } from "react"
 import { StyleSheet, View } from "react-native"
+import { connect } from "react-redux"
 
-import { RoundButton, SmallButton } from "../../components/Button"
+import { SmallButton } from "../../components/Button"
 import MarketplaceCard from "../../components/Card/MarketplaceCard"
 import { Horizontal, Page } from "../../components/Containers"
-import { Text, TextInput } from '../../components/Input'
+import { TextInput } from '../../components/Input'
 import { TitleText } from "../../components/Typography"
-import Colors from "../../constants/Colors"
 import ApiManager from "../../lib/ApiManager"
 
 const styles = StyleSheet.create({
   container: {
     paddingBottom: 20,
   },
-  marketplace:
-    {
-      marginRight: `auto`,
-    },
-  newItem:
-    {
-      marginLeft: `auto`,
-    },
+
   textInput: {
     flex: 1,
     marginRight: 10,
   },
-
-
 })
 
-const SEARCH_DELAY = 250
+const MIN_QUERY_LENGTH = 1
+const SEARCH_DELAY = 500
 
-
-class MarketplaceScreen extends Component {
+class OwnListingsScreen extends Component {
   static propTypes = {
     clear: PropTypes.func,
     navigation: PropTypes.func,
@@ -47,6 +37,10 @@ class MarketplaceScreen extends Component {
     },
   }
 
+  static mapStateToProps = (state) => ({
+    user: state.user,
+  })
+
 
   constructor(props) {
     super(props)
@@ -56,14 +50,17 @@ class MarketplaceScreen extends Component {
     }
   }
 
+
   componentDidMount() {
     this.repopulate()
   }
 
   repopulate = () => {
     const { search } = this.state
+    const { user: { email } } = this.props
+
     ApiManager.marketplace
-      .getListings(search)
+      .getOwnListings(email, search)
       .then((listing) => {
         this.setState({ listingsList: listing })
       })
@@ -85,13 +82,16 @@ class MarketplaceScreen extends Component {
   }
 
 
-  onChangeText = (searchstring) => {
+  onChangeText = (searchstring: String) => {
     this.setState({ search: searchstring })
-    clearTimeout(this.searchTimer)
-    this.searchTimer = setTimeout(
-      () => this.repopulate(),
-      SEARCH_DELAY,
-    )
+
+    if (searchstring.length >= MIN_QUERY_LENGTH) {
+      clearTimeout(this.searchTimer)
+      this.searchTimer = setTimeout(
+        () => this.repopulate(),
+        SEARCH_DELAY,
+      )
+    }
   }
 
   // onQueryChange = (search) => {
@@ -119,57 +119,49 @@ class MarketplaceScreen extends Component {
               refreshEnabled
               onRefresh={this.repopulate}
             >
-
                 <View style={styles.container}>
-                  <Horizontal style={{ flex: 1, justifyContent: `space-between` }}>
                 <TitleText>Marketplace</TitleText>
-                <RoundButton
-                  icon="plus"
-                  style={styles.newItem}
-                  onPress={this.navigateToMakeListing}
-                  buttonColor={Colors.accentColor}
-                />
-                <Feather name="user" size={32} onPress={() => navigation.navigate(`OwnListings`)} />
 
-
-                  </Horizontal>
                   <View>
                     <Horizontal>
                       <TextInput
                         style={styles.textInput}
                         placeholder="Search for a listing..."
-                        onChangeText={
-                          (searchInput) => this.onChangeText(searchInput)
-}
+                        onChangeText={(search) => this.onChangeText(search)}
                         clearButtonMode="always"
-                        value={search}
+                        value={this.state.search}
                         // ref={this.searchInput}
                       />
                       {search.length > 0 ? (
                         <SmallButton onPress={this.clear}>Clear</SmallButton>
                       ) : null}
                     </Horizontal>
-
-
                   </View>
-                  {listingsList.map((listing) => (
-                    <MarketplaceCard
-                      listingTitle={listing.listing_title}
-                      listingDescription={listing.listing_description}
-                      listingPrice={listing.listing_price}
-                      listingImage={listing.listing_image}
-                      authorName={listing.author_name}
-                      authorEmail={listing.author_email}
-                      pubDate={listing.pub_date}
-                      navigation={navigation}
-                      listingId={listing.listing_id}
-                    />
-                  ))}
+
                 </View>
+
+                    {listingsList.map((listing) => (
+                      <MarketplaceCard
+                        listingTitle={listing.listing_title}
+                        listingDescription={listing.listing_description}
+                        listingPrice={listing.listing_price}
+                        listingImage={listing.listing_image}
+                        authorName={listing.author_name}
+                        authorEmail={listing.author_email}
+                        pubDate={listing.pub_date}
+                        navigation={navigation}
+                        listingId={listing.listing_id}
+                        deleteable
+                      />
+                    ))}
+                    <SmallButton onPress={this.navigateToMakeListing}>
+                      Post an item
+                    </SmallButton>
             </Page>
       )
     }
 }
 
-
-export default MarketplaceScreen
+export default connect(
+  OwnListingsScreen.mapStateToProps,
+)(OwnListingsScreen)

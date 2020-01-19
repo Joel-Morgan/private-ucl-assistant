@@ -129,13 +129,10 @@ Make a listing for
     }
 
     _pickImage = async () => {
-      console.log(this.state.listing_title)
       const result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: true,
         aspect: [4, 3],
       })
-
-      console.log(result)
 
       if (!result.cancelled) {
         this.setState({

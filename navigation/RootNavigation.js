@@ -6,6 +6,7 @@ import ListingDetailScreen from "../screens/ListingDetailScreen"
 import LiveSeatingMapScreen from "../screens/LiveSeatingMapScreen"
 import MarketplaceScreen from "../screens/MarketplaceScreen/MakeListingScreen"
 import MakeListingScreen from "../screens/MarketplaceScreen/MakeListingScreen"
+import OwnListingsScreen from "../screens/MarketplaceScreen/OwnListingsScreen"
 import NotificationsScreen from "../screens/NotificationsScreen"
 import PersonDetailScreen from "../screens/PersonDetailScreen"
 import RoomDetailScreen from "../screens/RoomDetailScreen"
@@ -42,6 +43,9 @@ const RootStackNavigator = createStackNavigator(
         header: null,
       },
       screen: NotificationsScreen,
+    },
+    OwnListings: {
+      screen: OwnListingsScreen,
     },
     PersonDetail: {
       screen: PersonDetailScreen,

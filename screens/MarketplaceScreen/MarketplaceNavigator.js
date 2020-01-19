@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import MakeListingScreen from './MakeListingScreen'
 import MarketplaceScreen from './MarketplaceScreen'
+import OwnListingsScreen from './OwnListingsScreen'
 
 const MarketplaceNavigator = createStackNavigator(
   {
@@ -10,6 +11,9 @@ const MarketplaceNavigator = createStackNavigator(
     },
     Marketplace: {
       screen: MarketplaceScreen,
+    },
+    OwnListings: {
+      screen: OwnListingsScreen,
     },
   },
   {
