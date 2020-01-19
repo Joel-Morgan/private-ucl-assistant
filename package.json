@@ -28,12 +28,6 @@
     "upload": "node scripts/upload.js"
   },
 
-  "lint-staged": {
-    "*.{js,jsx,json}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "config": {
     "react-native-storybook-loader": {
       "pattern": "**/*-stories.js"
